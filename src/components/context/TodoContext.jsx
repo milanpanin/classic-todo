@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
-const TodoContext = React.createContext();
-const UpdateTodoContext = React.createContext();
+const TodoContext = React.createContext([]);
+const UpdateTodoContext = React.createContext([]);
 
 export const useTodo = () => {
   return useContext(TodoContext);

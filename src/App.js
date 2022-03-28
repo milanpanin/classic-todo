@@ -1,13 +1,18 @@
 import './App.css';
 import NewTodo from './components/NewTodo';
 import Theme from './components/Theme';
+import TodoList from './components/TodoList';
+import { TodoProvider } from './components/context/TodoContext'
 
 function App() {
   return (
-    <div className="App">
-      <Theme/>
-      <NewTodo />
-    </div>
+    <TodoProvider value={[]}>
+      <main className="App">
+        <Theme />
+        <NewTodo />
+        <TodoList/>
+      </main>
+    </TodoProvider>
   );
 }
 
