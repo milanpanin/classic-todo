@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useTodo, useUpdateTodo } from "./context/TodoContext";
+import { useState, useContext } from "react";
 import styled from "styled-components";
+import ToDoContext from "../context/todo-context";
 
 const Input = styled.section`
   padding: 25px;
@@ -9,7 +9,7 @@ const Input = styled.section`
   margin: 0 0 15px 0;
   background-color: ${(props) => props.theme.section};
 
-  input{
+  input {
     width: 80%;
     margin: 0 2% 0 0;
     padding: 5px;
@@ -18,35 +18,23 @@ const Input = styled.section`
     outline: none;
   }
 
-  button{
+  button {
     width: 18%;
     cursor: pointer;
     font-size: 18px;
+    border: 1px solid #636363;
   }
 `;
 
 const NewTodo = () => {
-  const updateTodo = useUpdateTodo();
-  const todoList = useTodo();
-
   const [todo, setTodo] = useState("");
+  const { addTodo } = useContext(ToDoContext);
 
-  const onButtonClick = () => {
-    const todoObj = {
-      // id: todoList.at(-1).id ? todoList.at(-1).id + 1 : 0,
-      id: Math.random(),
-      content: todo,
-      done: false,
+  const formHandler = () => {
+    if (todo) {
+      addTodo(todo);
+      setTodo("");
     }
-
-    const newList = [...todoList, todoObj];
-
-    newList.sort(function(x, y) {
-      return x.done - y.done;
-    });
-
-    updateTodo(newList);
-    setTodo("");
   };
 
   return (
@@ -57,7 +45,7 @@ const NewTodo = () => {
         onChange={(e) => setTodo(e.target.value)}
         placeholder="Enter your new To-Do"
       />
-      <button onClick={() => onButtonClick()}>Add To-Do</button>
+      <button onClick={formHandler}>Add To-Do</button>
     </Input>
   );
 };

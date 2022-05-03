@@ -1,6 +1,7 @@
+import { useContext } from 'react';
 import TodoItem from './TodoItem';
-import { useTodo } from "./context/TodoContext";
 import styled from "styled-components";
+import ToDoContext from '../context/todo-context';
 
 const List = styled.section`
   padding: 25px;
@@ -15,13 +16,13 @@ const List = styled.section`
 `;
 
 const TodoList = () => {
-  const todoList = useTodo();
-  
+  const {todo} = useContext(ToDoContext);
+
   return(
     <List>
-      {!todoList.length && <p className='emptyListText'>Unesite novi To-Do!</p>}
-      {todoList.map(el => 
-        <TodoItem key={el.id} el={el}/> 
+      {!todo.length && <p className='emptyListText'>List is empty, add new To-Do!</p>}
+      {todo.map(item => 
+        <TodoItem key={item.id} item={item}/> 
       )}
     </List>
   );

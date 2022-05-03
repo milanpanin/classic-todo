@@ -1,56 +1,37 @@
-import { useTodo, useUpdateTodo } from "./context/TodoContext";
+import { useContext } from "react";
 import styled from "styled-components";
+import ToDoContext from "../context/todo-context";
 
 const Item = styled.section`
-  padding: 10px;
+  padding: 15px;
   margin: 5px 0;
   border-radius: 5px;
   color: ${(props) => props.theme.text};
-  font-size: 16px;
+  font-size: 18px;
   transition: 0.1s;
   display: flex;
   justify-content: space-between;
-
-  &:hover{
-    background-color: #b9b9b9;
-    cursor: default;
-  }
+  text-decoration: ${(props) => props.strike ? 'line-through' : ''};
+  background-color: ${(props) => props.theme.itemBackground};
+  cursor: default;
 
   .doneButton, .deleteButton{
     padding: 2px 10px;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #636363;
     cursor: pointer;
   }
 `;
 
-const sortList = (list) => {
-  list.sort(function(x, y) {
-    return x.done - y.done;
-  });
-}
-
-const TodoItem = ({ el }) => {
-  const updateTodo = useUpdateTodo();
-  const todoList = useTodo();
-
-  const onItemDone = () => {
-    todoList.map(item => item.id === el.id && (item.done = true));
-
-    sortList(todoList);
-    updateTodo(todoList);
-  }
-
-  const onItemDelete = () => {
-    todoList.filter(item => item.id !== el.id);
-
-    sortList(todoList);
-    updateTodo(todoList);
-  }
+const TodoItem = ({item}) => {
+  const {commitTodo, deleteTodo} = useContext(ToDoContext);
 
   return ( 
     <Item >
-      {el.done ? <del>{el.content}</del> : <p>{el.content}</p>}
-      {!el.done && <button className="doneButton" onClick={onItemDone}>Done</button>}
-      {el.done && <button className="deleteButton" onClick={onItemDelete}>Delete</button>}
+      <p>{item.value}</p>
+      {!item.isDone && <button className="doneButton" onClick={() => commitTodo(item.id)}>Done</button>}
+      {item.isDone && <button className="deleteButton" onClick={() => deleteTodo(item.id)}>Delete</button>}
     </Item>
   );
 }
