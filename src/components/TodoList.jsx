@@ -1,14 +1,14 @@
-import { useContext } from 'react';
-import TodoItem from './TodoItem';
+import { useContext } from "react";
+import TodoItem from "./TodoItem";
 import styled from "styled-components";
-import ToDoContext from '../context/todo-context';
+import ToDoContext from "../context/todo-context";
 
 const List = styled.section`
   padding: 25px;
   border-radius: 5px;
   background-color: ${(props) => props.theme.section};
 
-  .emptyListText{
+  .emptyListText {
     font-size: 20px;
     color: ${(props) => props.theme.text};
     text-align: center;
@@ -20,14 +20,16 @@ const List = styled.section`
 `;
 
 const TodoList = () => {
-  const {todo} = useContext(ToDoContext);
+  const { todo } = useContext(ToDoContext);
 
-  return(
+  return (
     <List>
-      {!todo.length && <p className='emptyListText'>List is empty, add new To-Do!</p>}
-      {todo.map(item => 
-        <TodoItem key={item.id} item={item}/> 
+      {!todo.length && (
+        <p className="emptyListText">List is empty, add new To-Do!</p>
       )}
+      {todo.map((item) => (
+        <TodoItem key={item.id} item={item} />
+      ))}
     </List>
   );
 };

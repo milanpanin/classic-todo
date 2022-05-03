@@ -25,7 +25,6 @@ function App() {
         isDone: false
       };
 
-      console.log([...prevState, newTodoObj]);
       return [...prevState, newTodoObj];
     });
   }
@@ -34,7 +33,6 @@ function App() {
     let commitedTodo = [...todo];
     commitedTodo.map(el => (el.id === todoId) && (el.isDone = true));
 
-    console.log(commitedTodo);
     setTodo(commitedTodo);
   }
 
