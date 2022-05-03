@@ -32,7 +32,7 @@ const ThemeSelector = styled.section`
 
   .changeThemeBtn:hover {
     transform: rotate(360deg);
-  }
+  } 
 `;
 
 const Theme = () => {

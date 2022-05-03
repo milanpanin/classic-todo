@@ -2,9 +2,16 @@
   margin: 0;
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
+  box-sizing: border-box;
 }
 
 .App{
   max-width: 80%;
   margin: 10px auto 50px;
+}
+
+@media only screen and (max-width: 800px) {
+  .App{
+    max-width: 96%;
+  }
 }

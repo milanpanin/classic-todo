@@ -31,15 +31,11 @@ function App() {
   }
 
   const commitTodo = (todoId) => {
-    setTodo((prevState) => {
-      [...prevState].find(el => {
-        if (el.id === todoId) {
-          el.isDone = true;
-        }
-      });
+    let commitedTodo = [...todo];
+    commitedTodo.map(el => (el.id === todoId) && (el.isDone = true));
 
-      return [...prevState];
-    });
+    console.log(commitedTodo);
+    setTodo(commitedTodo);
   }
 
   const deleteTodo = (todoId) => {

@@ -16,6 +16,11 @@ const Input = styled.section`
     font-size: 20px;
     border: 0;
     outline: none;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+      
+    }
   }
 
   button {
@@ -23,6 +28,26 @@ const Input = styled.section`
     cursor: pointer;
     font-size: 18px;
     border: 1px solid #636363;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    flex-direction: column;
+    padding: 15px;
+
+    input {
+      width: 100%;
+      margin: 0 0 15px 0;
+    }
+
+    button {
+      width: 50%;
+      margin: 0 auto;
+      padding: 5px 0;
+    }
   }
 `;
 

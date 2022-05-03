@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import ToDoContext from "../context/todo-context";
+import { BsFillCheckSquareFill, BsXSquareFill } from "react-icons/bs";
 
 const Item = styled.section`
   padding: 15px;
@@ -10,17 +11,27 @@ const Item = styled.section`
   font-size: 18px;
   transition: 0.1s;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   text-decoration: ${(props) => props.strike ? 'line-through' : ''};
   background-color: ${(props) => props.theme.itemBackground};
   cursor: default;
 
   .doneButton, .deleteButton{
-    padding: 2px 10px;
-    border-radius: 3px;
-    outline: none;
-    border: 1px solid #636363;
-    cursor: pointer;
+    cursor: pointer; 
+    font-size: 24px;
+  }
+
+  .doneButton:hover{
+    color: #509946;
+  }
+
+  .deleteButton:hover{
+    color: #922d2d;
+  }
+
+  .textStrike{
+    text-decoration: line-through;
   }
 `;
 
@@ -29,9 +40,9 @@ const TodoItem = ({item}) => {
 
   return ( 
     <Item >
-      <p>{item.value}</p>
-      {!item.isDone && <button className="doneButton" onClick={() => commitTodo(item.id)}>Done</button>}
-      {item.isDone && <button className="deleteButton" onClick={() => deleteTodo(item.id)}>Delete</button>}
+      <p className={item.isDone ? 'textStrike' : ''}>{item.value}</p>
+      {!item.isDone && <BsFillCheckSquareFill className="doneButton" onClick={() => commitTodo(item.id)} />}
+      {item.isDone && <BsXSquareFill className="deleteButton" onClick={() => deleteTodo(item.id)} />}
     </Item>
   );
 }

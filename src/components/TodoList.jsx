@@ -12,6 +12,10 @@ const List = styled.section`
     font-size: 20px;
     color: ${(props) => props.theme.text};
     text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;
 
