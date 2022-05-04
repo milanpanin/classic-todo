@@ -33,6 +33,7 @@ const Item = styled.section`
 
   .textStrike {
     text-decoration: line-through;
+    color:  ${(props) => props.theme.section};
   }
 `;
 

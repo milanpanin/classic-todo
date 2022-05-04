@@ -17,6 +17,13 @@ function App() {
     theme === 'light' ? setTheme('dark') : setTheme('light');
   }
 
+  const sortTodoList = () => {
+    const todoCopy = [...todo];
+    todoCopy.sort((a, z) => a.isDone - z.isDone);
+
+    setTodo(todoCopy);
+  }
+
   const addTodo = (newTodo) => {
     setTodo((prevState) => {
       const newTodoObj = {
@@ -34,6 +41,7 @@ function App() {
     commitedTodo.map(el => (el.id === todoId) && (el.isDone = true));
 
     setTodo(commitedTodo);
+    sortTodoList();
   }
 
   const deleteTodo = (todoId) => {
