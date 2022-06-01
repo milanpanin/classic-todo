@@ -22,10 +22,9 @@ function App() {
   }
 
   const sortTodoList = () => {
-    const todoCopy = [...todo];
-    todoCopy.sort((a, z) => a.isDone - z.isDone);
-
-    setTodo(todoCopy);
+    setTodo((prevState) => {
+      return prevState.sort((a, z) => a.isDone - z.isDone);
+    });
   }
 
   const addTodo = (newTodo) => {
