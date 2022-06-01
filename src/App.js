@@ -21,6 +21,13 @@ function App() {
     localStorage.setItem('allTodos', JSON.stringify(data));
   }
 
+  const sortTodoList = () => {
+    const todoCopy = [...todo];
+    todoCopy.sort((a, z) => a.isDone - z.isDone);
+
+    setTodo(todoCopy);
+  }
+
   const addTodo = (newTodo) => {
     setTodo((prevState) => {
       const newTodoObj = {
@@ -34,6 +41,8 @@ function App() {
 
       return newState;
     });
+
+    sortTodoList();
   }
 
   const commitTodo = (todoId) => {
@@ -42,6 +51,7 @@ function App() {
     setLocalStorage(commitedTodo);
 
     setTodo(commitedTodo);
+    sortTodoList();
   }
 
   const deleteTodo = (todoId) => {
