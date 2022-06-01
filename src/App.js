@@ -11,10 +11,14 @@ import './App.css';
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(JSON.parse(localStorage.getItem('allTodos')) || []);
 
   const changeTheme = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
+  }
+
+  const setLocalStorage = (data) => {
+    localStorage.setItem('allTodos', JSON.stringify(data));
   }
 
   const addTodo = (newTodo) => {
@@ -25,19 +29,24 @@ function App() {
         isDone: false
       };
 
-      return [...prevState, newTodoObj];
+      let newState = [...prevState, newTodoObj];
+      setLocalStorage(newState);
+
+      return newState;
     });
   }
 
   const commitTodo = (todoId) => {
     let commitedTodo = [...todo];
     commitedTodo.map(el => (el.id === todoId) && (el.isDone = true));
+    setLocalStorage(commitedTodo);
 
     setTodo(commitedTodo);
   }
 
   const deleteTodo = (todoId) => {
     let newTodoList = todo.filter(item => item.id !== todoId);
+    setLocalStorage(newTodoList);
 
     setTodo(newTodoList);
   }
