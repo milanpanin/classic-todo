@@ -10,11 +10,17 @@ import './App.css';
 
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme'));
   const [todo, setTodo] = useState(JSON.parse(localStorage.getItem('allTodos')) || []);
 
   const changeTheme = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+    if(theme === 'light'){
+      setTheme('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setTheme('light');
+      localStorage.setItem('theme', 'light');
+    }
   }
 
   const setLocalStorage = (data) => {
